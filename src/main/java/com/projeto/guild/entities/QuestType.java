@@ -1,0 +1,45 @@
+package com.projeto.guild.entities;
+
+import java.util.Objects;
+
+public class QuestType {
+
+    private Long id;
+    private String name;
+
+    public QuestType() {
+    }
+
+    public QuestType(String name, Long id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        QuestType questType = (QuestType) o;
+        return Objects.equals(getId(), questType.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+}

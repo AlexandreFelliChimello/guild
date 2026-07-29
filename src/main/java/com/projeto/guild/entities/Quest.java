@@ -1,5 +1,7 @@
 package com.projeto.guild.entities;
 
+import com.projeto.guild.entities.enums.QuestStatus;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +21,11 @@ public class Quest {
 
     public Quest() {}
 
-    public Quest(long id, String title, Instant createdAt, Integer questStatus, Adventurer client) {
+    public Quest(Long id, String title, Instant createdAt, QuestStatus questStatus, Adventurer client) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
-        this.questStatus = questStatus;
+        setQuestStatus(questStatus);
         this.client = client;
     }
 
@@ -51,12 +53,12 @@ public class Quest {
         this.createdAt = createdAt;
     }
 
-    public Integer getQuestStatus() {
-        return questStatus;
-    }
+    public QuestStatus getQuestStatus() {return QuestStatus.valueOf(questStatus);}
 
-    public void setQuestStatus(Integer questStatus) {
-        this.questStatus = questStatus;
+    public void setQuestStatus(QuestStatus questStatus) {
+        if (questStatus != null) {
+            this.questStatus = questStatus.getCode();
+        }
     }
 
     public Adventurer getClient() {return client;}

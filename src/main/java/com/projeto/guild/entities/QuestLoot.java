@@ -1,5 +1,7 @@
 package com.projeto.guild.entities;
 
+import com.projeto.guild.entities.PK.QuestLootPK;
+
 import java.util.Objects;
 
 public class QuestLoot {
@@ -7,14 +9,25 @@ public class QuestLoot {
     private QuestLootPK id;
     private Integer quantity;
     private Double goldValue;
+    private Loot loot;
+    private Quest quest;
 
     public QuestLoot() {}
 
-    public QuestLoot(QuestLootPK id, Integer quantity, Double goldValue) {
-        this.id = id;
+    public QuestLoot(Loot loot, Quest quest, Integer quantity, Double goldValue) {
+        id.setLoot(loot);
+        id.setQuest(quest);
         this.quantity = quantity;
         this.goldValue = goldValue;
     }
+
+    public Loot getLoot() {return id.getLoot();}
+
+    public void setLoot(Loot loot) {id.setLoot(loot);}
+
+    public Quest getQuest() {return id.getQuest();}
+
+    public void setQuest(Quest quest) {id.setQuest(quest);}
 
     public Double getGoldValue() {
         return goldValue;

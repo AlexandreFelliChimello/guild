@@ -15,17 +15,17 @@ public enum QuestStatus {
         this.code = code;
     }
 
-    public int getcode() {
+    public int getCode() {
         return code;
     }
 
-    public void setcode(int code) {
+    public void setCode(int code) {
         this.code = code;
     }
     // Method to return the enum by code comparison
     public static QuestStatus valueOf(int code){
         for (QuestStatus q : QuestStatus.values()){
-            if (q.getcode() == code){
+            if (q.getCode() == code){
                 return q;
             }
         }

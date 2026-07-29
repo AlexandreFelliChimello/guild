@@ -1,11 +1,15 @@
 package com.projeto.guild.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class QuestType {
 
     private Long id;
     private String name;
+
+    private List<Loot> loots = new ArrayList<>();
 
     public QuestType() {
     }
@@ -29,6 +33,10 @@ public class QuestType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Loot> getLoots() {
+        return loots;
     }
 
     @Override

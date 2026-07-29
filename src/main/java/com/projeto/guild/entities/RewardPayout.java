@@ -8,12 +8,15 @@ public class RewardPayout {
     private Long id;
     private Instant paidAt;
 
+    private Quest quest;
+
     public RewardPayout() {
     }
 
-    public RewardPayout(Instant paidAt, Long id) {
+    public RewardPayout(Instant paidAt, Long id, Quest quest) {
         this.paidAt = paidAt;
         this.id = id;
+        this.quest = quest;
     }
 
     public Long getId() {
@@ -31,6 +34,10 @@ public class RewardPayout {
     public void setPaidAt(Instant paidAt) {
         this.paidAt = paidAt;
     }
+
+    public Quest getQuest() {return quest;}
+
+    public void setQuest(Quest quest) {this.quest = quest;}
 
     @Override
     public boolean equals(Object o) {

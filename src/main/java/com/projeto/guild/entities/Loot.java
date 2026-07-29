@@ -1,5 +1,7 @@
 package com.projeto.guild.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Loot {
@@ -9,6 +11,8 @@ public class Loot {
     private String description;
     private Double goldValue;
     private String imUrl;
+
+    private List<QuestType> questTypes = new ArrayList<>();
 
     public Loot() {}
 
@@ -58,6 +62,10 @@ public class Loot {
 
     public void setImUrl(String imUrl) {
         this.imUrl = imUrl;
+    }
+
+    public List<QuestType> getQuestTypes() {
+        return questTypes;
     }
 
     @Override

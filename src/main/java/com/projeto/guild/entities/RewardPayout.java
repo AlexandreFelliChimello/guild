@@ -2,19 +2,21 @@ package com.projeto.guild.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_rewardPayout")
-public class RewardPayout {
+public class RewardPayout implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant paidAt;
     
-    @OneToOne(mappedBy = "rewardPayout")
+    @OneToOne
+    @MapsId
     private Quest quest;
 
     public RewardPayout() {

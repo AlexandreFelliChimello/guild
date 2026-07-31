@@ -3,10 +3,9 @@ package com.projeto.guild.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
+@Entity
 public class QuestType implements Serializable {
 
     @Id
@@ -20,9 +19,9 @@ public class QuestType implements Serializable {
     public QuestType() {
     }
 
-    public QuestType(String name, Long id) {
-        this.name = name;
+    public QuestType(Long id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public Long getId() {

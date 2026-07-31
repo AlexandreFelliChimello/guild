@@ -95,4 +95,12 @@ public class Quest implements Serializable {
     public int hashCode() {
         return Objects.hashCode(getId());
     }
+
+    public Double total(){
+        Double sum = 0.0;
+        for (QuestLoot questLoot : questLoots) {
+            sum += questLoot.subTotal();
+        }
+        return sum;
+    }
 }

@@ -7,18 +7,18 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_quest_Loot")
-public class QuestLoot  {
+public class QuestLoot implements Serializable {
 
     @EmbeddedId
     private QuestLootPK id;
+
     private Integer quantity;
     private Double goldValue;
-    private Loot loot;
-    private Quest quest;
 
     public QuestLoot() {}
 
@@ -63,5 +63,8 @@ public class QuestLoot  {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+    public Double subTotal(){
+        return quantity*goldValue;
     }
 }

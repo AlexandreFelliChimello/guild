@@ -1,14 +1,20 @@
 package com.projeto.guild.entities;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QuestType {
+public class QuestType implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
+    @ManyToMany(mappedBy = "questTypes")
     private List<Loot> loots = new ArrayList<>();
 
     public QuestType() {

@@ -1,21 +1,31 @@
 package com.projeto.guild.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
-public class Adventurer {
+import java.io.Serializable;
+import java.util.*;
+
+@Entity
+@Table(name = "tb_client")
+public class Adventurer implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String name;
     private String email;
     private String roleClass;
     private String password;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
     private List<Quest> quests = new ArrayList<>();
 
     public Adventurer() {}
 
-    public Adventurer(long id, String name, String email, String roleClass, String password) {
+    public Adventurer(Long id, String name, String email, String roleClass, String password) {
         this.id = id;
         this.name = name;
         this.email = email;

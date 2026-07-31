@@ -1,18 +1,30 @@
 package com.projeto.guild.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import jakarta.persistence.*;
 
-public class Loot {
+import java.io.Serializable;
+import java.util.*;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "tb_loot")
+public class Loot implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private Double goldValue;
     private String imUrl;
 
-    private List<QuestType> questTypes = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "tb_loot_questType", joinColumns = @JoinColumn(name = "loot_id"), inverseJoinColumns = @JoinColumn(name = "questType_id"))
+    private Set<QuestType> questTypes = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.loot")
+    private Set<QuestLoot> questLoots = new HashSet<>();
 
     public Loot() {}
 
@@ -64,9 +76,11 @@ public class Loot {
         this.imUrl = imUrl;
     }
 
-    public List<QuestType> getQuestTypes() {
+    public Set<QuestType> getQuestTypes() {
         return questTypes;
     }
+
+    public Set<QuestLoot> getQuestLoots() {return questLoots;}
 
     @Override
     public boolean equals(Object o) {

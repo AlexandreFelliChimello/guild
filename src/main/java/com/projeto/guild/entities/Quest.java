@@ -1,22 +1,35 @@
 package com.projeto.guild.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.guild.entities.enums.QuestStatus;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Quest {
+@Entity
+@Table(name = "tb_quest")
+public class Quest implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant createdAt;
     private Integer questStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Adventurer client;
 
+    @OneToOne(mappedBy = "quest", cascade = CascadeType.ALL)
     private RewardPayout rewardPayout;
 
+    @OneToMany(mappedBy = "id.quest")
     private List<QuestLoot> questLoots = new ArrayList<>();
 
     public Quest() {}

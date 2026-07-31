@@ -1,11 +1,19 @@
 package com.projeto.guild.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.guild.entities.PK.QuestLootPK;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
-public class QuestLoot {
+@Entity
+@Table(name = "tb_quest_Loot")
+public class QuestLoot  {
 
+    @EmbeddedId
     private QuestLootPK id;
     private Integer quantity;
     private Double goldValue;
@@ -20,7 +28,7 @@ public class QuestLoot {
         this.quantity = quantity;
         this.goldValue = goldValue;
     }
-
+    @JsonIgnore
     public Loot getLoot() {return id.getLoot();}
 
     public void setLoot(Loot loot) {id.setLoot(loot);}

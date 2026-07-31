@@ -2,12 +2,20 @@ package com.projeto.guild.entities.PK;
 
 import com.projeto.guild.entities.Loot;
 import com.projeto.guild.entities.Quest;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.util.Objects;
 
+@Embeddable
 public class QuestLootPK {
 
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
     private Quest quest;
+    @ManyToOne
+    @JoinColumn(name = "loot_id")
     private Loot loot;
 
     public Quest getQuest() {

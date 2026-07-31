@@ -1,13 +1,20 @@
 package com.projeto.guild.entities;
 
+import jakarta.persistence.*;
+
 import java.time.Instant;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_rewardPayout")
 public class RewardPayout {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant paidAt;
-
+    
+    @OneToOne(mappedBy = "rewardPayout")
     private Quest quest;
 
     public RewardPayout() {

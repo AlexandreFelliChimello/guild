@@ -2,6 +2,8 @@ package com.projeto.guild.services;
 
 import com.projeto.guild.entities.Adventurer;
 import com.projeto.guild.repositories.AdventurerRepository;
+import com.projeto.guild.services.exceptions.DataBaseException;
+import com.projeto.guild.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,29 +25,29 @@ public class AdventurerService {
 
     public Adventurer findById(Long id) {
         Optional<Adventurer> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Adventurer insert(Adventurer obj) {
         return repository.save(obj);
     }
 
-    public Adventurer Delete(Long id) {
+    public void delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e){
-            throw new EmptyResultDataAccessException;
-        } catch (DataIntegrityViolationException e){
-            throw new DatabaseException(e.getMessage());
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e) {
+            throw new DataBaseException(e.getMessage());
         }
     }
     public Adventurer update(Adventurer obj, Long id) {
         try{
             Adventurer adv = repository.getReferenceById(id);
             updateData(adv, obj);
-            repository.save(adv);
+            return repository.save(adv);
         }catch (EntityNotFoundException e){
-            throw new EntityNotFoundException(e.getMessage());
+            throw new ResourceNotFoundException(id);
         }
     }
     private void updateData(Adventurer entity, Adventurer obj) {
